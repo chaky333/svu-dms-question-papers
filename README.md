@@ -1,1 +1,1 @@
-# svu-dms-question-papers
+SVU DMS(MBA) Year-wise Question Papers 
