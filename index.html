@@ -1,167 +1,308 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVU DMS MBA Question Papers</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVU DMS (MBA) - Question Papers</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7ff;
-      color: #24304a;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f3ff;
+  color: #252044;
+}
 
-    header {
-      background: white;
-      padding: 18px;
-      text-align: center;
-      border-bottom: 4px solid #ff923d;
-    }
+header {
+  background: linear-gradient(135deg, #5b21b6, #8b5cf6);
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
 
-    header h2 {
-      color: #5636c9;
-      margin: 0;
-    }
+header h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
 
-    .hero {
-      background: linear-gradient(135deg, #5636c9, #9374ff);
-      color: white;
-      text-align: center;
-      padding: 35px 18px;
-    }
+header p {
+  margin: 0;
+}
 
-    .hero h1 { font-size: 27px; }
+main {
+  max-width: 800px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
 
-    .hero p { line-height: 1.6; }
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #24104b12;
+}
 
-    .search {
-      width: 100%;
-      max-width: 420px;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-    }
+h2 {
+  color: #5b21b6;
+  font-size: 22px;
+}
 
-    main {
-      padding: 20px 16px;
-      max-width: 850px;
-      margin: auto;
-    }
+.year {
+  background: #ede9fe;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
 
-    h2 { color: #5636c9; }
+.items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
 
-    .semesters {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+.item {
+  display: block;
+  width: 100%;
+  border: 1px solid #ddd6fe;
+  background: #faf9ff;
+  color: #4c1d95;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
 
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 20px 10px;
-      text-align: center;
-      box-shadow: 0 3px 12px #00000010;
-    }
+.item:hover {
+  background: #ede9fe;
+}
 
-    .card .emoji { font-size: 30px; }
+.back {
+  background: #5b21b6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
 
-    .card h3 { margin-bottom: 8px; }
+.paper {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
 
-    .card p {
-      color: #68738a;
-      font-size: 13px;
-    }
+.note {
+  background: #fff7ed;
+  color: #9a3412;
+  padding: 14px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
 
-    .upload {
-      display: block;
-      background: #ff923d;
-      color: white;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 10px;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    footer {
-      padding: 25px 12px;
-      text-align: center;
-      color: #68738a;
-      font-size: 13px;
-    }
-  </style>
+footer {
+  text-align: center;
+  color: #6b6385;
+  padding: 25px 12px;
+  font-size: 13px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h2>🎓 SVU DMS</h2>
-    <p>MBA Previous Year Question Papers</p>
-  </header>
+<header>
+  <h1>SVU DMS (MBA)</h1>
+  <p>Previous Year Question Papers</p>
+  <p>Sri Venkateswara University, Tirupati</p>
+</header>
 
-  <section class="hero">
-    <h1>Your Exams. Your Preparation.</h1>
-    <p>Find MBA question papers semester by semester.</p>
-    <input
-      class="search"
-      type="search"
-      placeholder="Search MBA subjects..."
-      aria-label="Search MBA subjects"
-    >
-  </section>
+<main>
+  <div class="panel">
+    <div id="content"></div>
+  </div>
+</main>
 
-  <main>
-    <h2>📚 Choose Your Semester</h2>
+<footer>
+  SVU DMS (MBA) | Student Question Paper Resource
+</footer>
 
-    <div class="semesters">
-      <div class="card">
-        <div class="emoji">📘</div>
-        <h3>Semester 1</h3>
-        <p>Explore subjects and papers</p>
+<script>
+const subjects = {
+  "Semester I": [
+    "MANAGEMENT AND ORGANIZATIONAL BEHAVIOUR",
+    "MANAGERIAL COMMUNICATION",
+    "MANAGERIAL ECONOMICS",
+    "ACCOUNTING FOR MANAGERS",
+    "QUANTITATIVE ANALYSIS FOR MANAGEMENT DECISIONS",
+    "BUSINESS STATISTICS",
+    "MODELLING WITH EXCEL",
+    "HUMAN VALUES AND PROFESSIONAL ETHICS"
+  ],
+
+  "Semester II": [
+    "MARKETING MANAGEMENT",
+    "HUMAN RESOURCES MANAGEMENT",
+    "FINANCIAL MANAGEMENT",
+    "PRODUCTION MANAGEMENT",
+    "BUSINESS RESEARCH METHODS",
+    "OPERATIONS RESEARCH",
+    "MANAGEMENT INFORMATION SYSTEMS",
+    "LEADERSHIP VALUES, AND STYLES"
+  ],
+
+  "Semester III": [
+    "Business Environment",
+    "Entrepreneurship",
+    "Marketing Research",
+    "Advertising and Sales Promotion Management",
+    "Product and Brand Management",
+    "Financial Services",
+    "Investment Management",
+    "Bank Management",
+    "Training & Development",
+    "Human Resource Planning",
+    "Leadership Development"
+  ],
+
+  "Semester IV": [
+    "Digital Business Models",
+    "Strategic Management",
+    "Business Laws",
+    "Organization Development",
+    "Marketing of Services",
+    "Retail Management",
+    "Supply Chain Management",
+    "International Finance Management",
+    "Financial Derivatives",
+    "Risk Management and Insurance",
+    "Strategic Human Resource Development",
+    "Reward Management",
+    "Global Human Resource Management",
+    "Stress Management"
+  ]
+};
+
+/*
+Add real question-paper JPG image URLs here later.
+Example:
+papers["Semester I|MANAGERIAL ECONOMICS|2024"] = [
+  "https://example.com/page1.jpg",
+  "https://example.com/page2.jpg"
+];
+*/
+const papers = {};
+
+const content = document.getElementById("content");
+let currentView = "home";
+
+function makeButton(label, action) {
+  const button = document.createElement("button");
+  button.className = "item";
+  button.textContent = label;
+  button.onclick = action;
+  return button;
+}
+
+function showHome() {
+  currentView = "home";
+  content.innerHTML = `
+    <h2>Academic Year</h2>
+    <div class="year">2024–2025</div>
+    <h2>Select Semester</h2>
+    <div id="items" class="items"></div>
+  `;
+
+  const list = document.getElementById("items");
+
+  Object.keys(subjects).forEach(semester => {
+    list.appendChild(makeButton(semester, () => showSubjects(semester)));
+  });
+}
+
+function showSubjects(semester) {
+  currentView = "subjects";
+  content.innerHTML = `
+    <button class="back" id="back">← Back</button>
+    <h2>${semester}</h2>
+    <div class="year">Academic Year: 2024–2025</div>
+    <div id="items" class="items"></div>
+  `;
+
+  document.getElementById("back").onclick = showHome;
+  const list = document.getElementById("items");
+
+  subjects[semester].forEach(subject => {
+    list.appendChild(makeButton(subject, () => showYears(semester, subject)));
+  });
+}
+
+function showYears(semester, subject) {
+  currentView = "years";
+  content.innerHTML = `
+    <button class="back" id="back">← Back</button>
+    <h2>${subject}</h2>
+    <p>Select an examination year.</p>
+    <div id="items" class="items"></div>
+  `;
+
+  document.getElementById("back").onclick = () => showSubjects(semester);
+  const list = document.getElementById("items");
+
+  ["2025", "2024", "2023", "2022", "2021"].forEach(year => {
+    list.appendChild(makeButton(year, () => showPaper(semester, subject, year)));
+  });
+}
+
+function showPaper(semester, subject, year) {
+  currentView = "paper";
+  content.innerHTML = `
+    <button class="back" id="back">← Back</button>
+    <h2>${subject}</h2>
+    <p>Semester: ${semester}</p>
+    <p>Examination Year: ${year}</p>
+    <div id="paperContent"></div>
+  `;
+
+  document.getElementById("back").onclick = () => showYears(semester, subject);
+
+  const paperContent = document.getElementById("paperContent");
+  const key = `${semester}|${subject}|${year}`;
+  const pages = papers[key] || [];
+
+  if (pages.length === 0) {
+    paperContent.innerHTML = `
+      <div class="note">
+        <strong>Unavailable</strong><br>
+        The question paper has not been added yet.
       </div>
+    `;
+    return;
+  }
 
-      <div class="card">
-        <div class="emoji">📗</div>
-        <h3>Semester 2</h3>
-        <p>Explore subjects and papers</p>
-      </div>
+  pages.forEach((url, index) => {
+    const image = document.createElement("img");
+    image.className = "paper";
+    image.src = url;
+    image.alt = `Question paper page ${index + 1}`;
+    image.loading = "lazy";
+    paperContent.appendChild(image);
+  });
+}
 
-      <div class="card">
-        <div class="emoji">📙</div>
-        <h3>Semester 3</h3>
-        <p>Explore subjects and papers</p>
-      </div>
-
-      <div class="card">
-        <div class="emoji">📕</div>
-        <h3>Semester 4</h3>
-        <p>Explore subjects and papers</p>
-      </div>
-    </div>
-
-    <h2>📄 Have a Missing Question Paper?</h2>
-    <p>Help fellow MBA students by sharing a paper.</p>
-
-    <a class="upload" href="#upload">
-      ＋ Upload a Question Paper
-    </a>
-
-    <p style="font-size:13px;color:#68738a;">
-      Papers will be listed after they are verified and published.
-    </p>
-  </main>
-
-  <footer>
-    Independent student resource · SVU DMS MBA
-  </footer>
+showHome();
+</script>
 
 </body>
 </html>
+
