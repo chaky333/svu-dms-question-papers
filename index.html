@@ -1,364 +1,925 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d20">
+  <title>SVU DMS | Question Paper Library</title>
+  <meta name="description" content="SVU DMS MBA question paper library. Find, view and share previous semester question papers.">
 
-<title>SVU DMS (MBA)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    :root {
+      --bg: #080d20;
+      --panel: #101832;
+      --panel2: #141f3e;
+      --blue: #4385ff;
+      --purple: #9c65ff;
+      --cyan: #4de5ff;
+      --text: #f4f6ff;
+      --muted: #a4aecb;
+      --border: rgba(153, 174, 255, .17);
+      --radius: 22px;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f1ff;
-  color: #292044;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-header {
-  background: linear-gradient(135deg, #4c1d95, #8b5cf6);
-  color: white;
-  text-align: center;
-  padding: 30px 15px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-header h1 {
-  margin: 0 0 10px;
-  font-size: 30px;
-}
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 10% 5%, rgba(55, 100, 255, .18), transparent 36%),
+        radial-gradient(ellipse at 95% 25%, rgba(155, 74, 255, .13), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-header p {
-  margin: 5px 0;
-}
+    button, input, select {
+      font: inherit;
+    }
 
-main {
-  max-width: 800px;
-  margin: 25px auto;
-  padding: 0 15px;
-}
+    button {
+      cursor: pointer;
+    }
 
-.panel {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 4px 15px #00000010;
-}
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+    }
 
-h2 {
-  color: #5b21b6;
-  font-size: 22px;
-  overflow-wrap: anywhere;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.items {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin: auto;
+    }
 
-.item {
-  width: 100%;
-  padding: 16px;
-  border: 1px solid #ddd6fe;
-  border-radius: 10px;
-  background: #faf8ff;
-  color: #4c1d95;
-  text-align: left;
-  font-size: 16px;
-  cursor: pointer;
-  overflow-wrap: anywhere;
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 13, 32, .86);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
 
-.item:hover {
-  background: #ede9fe;
-}
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
 
-.back {
-  padding: 11px 16px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #5b21b6;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
 
-.note {
-  padding: 15px;
-  border-radius: 9px;
-  background: #fff7ed;
-  color: #9a3412;
-  line-height: 1.6;
-}
+    .brand-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 8px 28px rgba(83, 109, 255, .35);
+      font-size: 23px;
+    }
 
-.paper {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 16px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
 
-footer {
-  padding: 25px 12px;
-  text-align: center;
-  color: #6b6385;
-  font-size: 13px;
-}
-</style>
-</head>
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #c8d1ef;
+      font-size: 13px;
+      font-weight: 600;
+    }
 
-<body>
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
 
-<header>
-  <h1>SVU DMS (MBA)</h1>
-  <p>Previous Year Question Papers</p>
-  <p>Sri Venkateswara University, Tirupati</p>
-</header>
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: linear-gradient(120deg, var(--blue), var(--purple));
+      color: white;
+    }
 
-<main>
-  <div class="panel">
-    <div id="content"></div>
-  </div>
-</main>
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 82px;
+      padding-bottom: 75px;
+    }
 
-<footer>
-  SVU DMS (MBA) | Student Question Paper Resource
-</footer>
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid rgba(77, 229, 255, .22);
+      border-radius: 50px;
+      background: rgba(77, 229, 255, .06);
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
 
-<script>
-const subjects = {
-  "Semester I": [
-    "MANAGEMENT AND ORGANIZATIONAL BEHAVIOUR",
-    "MANAGERIAL COMMUNICATION",
-    "MANAGERIAL ECONOMICS",
-    "ACCOUNTING FOR MANAGERS",
-    "QUANTITATIVE ANALYSIS FOR MANAGEMENT DECISIONS",
-    "BUSINESS STATISTICS",
-    "MODELLING WITH EXCEL",
-    "HUMAN VALUES AND PROFESSIONAL ETHICS"
-  ],
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--cyan);
+    }
 
-  "Semester II": [
-    "MARKETING MANAGEMENT",
-    "HUMAN RESOURCES MANAGEMENT",
-    "FINANCIAL MANAGEMENT",
-    "PRODUCTION MANAGEMENT",
-    "BUSINESS RESEARCH METHODS",
-    "OPERATIONS RESEARCH",
-    "MANAGEMENT INFORMATION SYSTEMS",
-    "LEADERSHIP VALUES, AND STYLES"
-  ],
+    h1 {
+      max-width: 690px;
+      margin-top: 23px;
+      font-size: clamp(38px, 5.6vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -3px;
+      font-weight: 900;
+    }
 
-  "Semester III": [
-    "Business Environment",
-    "Entrepreneurship",
-    "Marketing Research",
-    "Advertising and Sales Promotion Management",
-    "Product and Brand Management",
-    "Financial Services",
-    "Investment Management",
-    "Bank Management",
-    "Training & Development",
-    "Human Resource Planning",
-    "Leadership Development"
-  ],
+    .gradient-text {
+      background: linear-gradient(95deg, #60a5ff, #ae80ff 55%, #55e8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-  "Semester IV": [
-    "Digital Business Models",
-    "Strategic Management",
-    "Business Laws",
-    "Organization Development",
-    "Marketing of Services",
-    "Retail Management",
-    "Supply Chain Management",
-    "International Finance Management",
-    "Financial Derivatives",
-    "Risk Management and Insurance",
-    "Strategic Human Resource Development",
-    "Reward Management",
-    "Global Human Resource Management",
-    "Stress Management"
-  ]
-};
+    .hero-copy {
+      max-width: 570px;
+      margin-top: 21px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
 
-/*
-Add question-paper JPG image links here when available.
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 28px;
+    }
 
-Example:
-papers["Semester I|MANAGERIAL ECONOMICS|2025"] = [
-  "images/managerial-economics-page1.jpg",
-  "images/managerial-economics-page2.jpg"
-];
-*/
-const papers = {};
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 19px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #151f3b;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
 
-const content = document.getElementById("content");
+    .btn-primary {
+      border: none;
+      background: linear-gradient(120deg, #367fff, #8c54f6);
+      box-shadow: 0 10px 28px rgba(75, 104, 255, .24);
+    }
 
-function makeButton(label, action) {
-  const button = document.createElement("button");
-  button.className = "item";
-  button.textContent = label;
-  button.onclick = action;
-  return button;
-}
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(70, 112, 255, .2);
+    }
 
-/* HOME: SHOW ONLY SEMESTERS */
+    .hero-visual {
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      perspective: 900px;
+    }
 
-function showHome() {
-  content.innerHTML = `
-    <h2>Select Semester</h2>
-    <div id="items" class="items"></div>
-  `;
+    .orb {
+      position: absolute;
+      width: 285px;
+      height: 285px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100, 97, 255, .24), rgba(63, 126, 255, .05) 65%, transparent 70%);
+      animation: breathe 5s ease-in-out infinite;
+    }
 
-  const list = document.getElementById("items");
+    .orbit {
+      position: absolute;
+      width: 305px;
+      height: 115px;
+      border: 1px solid rgba(112, 162, 255, .45);
+      border-radius: 50%;
+      transform: rotate(-32deg);
+      animation: orbit 12s linear infinite;
+    }
 
-  Object.keys(subjects).forEach(semester => {
-    list.appendChild(
-      makeButton(semester, () => showSubjects(semester))
-    );
-  });
-}
+    .orbit.two {
+      width: 280px;
+      height: 110px;
+      transform: rotate(52deg);
+      border-color: rgba(181, 111, 255, .5);
+      animation-direction: reverse;
+    }
 
-/* SHOW SUBJECTS */
+    .book-scene {
+      position: relative;
+      z-index: 2;
+      transform-style: preserve-3d;
+      animation: floatBook 5s ease-in-out infinite;
+    }
 
-function showSubjects(semester) {
-  content.innerHTML = `
-    <button class="back" id="back">← Back</button>
-    <h2>${semester}</h2>
-    <div id="items" class="items"></div>
-  `;
+    .book {
+      position: relative;
+      width: 188px;
+      height: 240px;
+      padding: 25px 20px;
+      border-radius: 8px 18px 18px 8px;
+      border-left: 8px solid #2552b9;
+      background: linear-gradient(145deg, #397cff, #6744d8 70%, #292e8b);
+      box-shadow: 16px 20px 0 #121b48, 22px 30px 45px rgba(0, 0, 0, .5), inset -8px 0 15px rgba(0, 0, 0, .15);
+      transform: rotateY(-17deg) rotateX(5deg);
+    }
 
-  document.getElementById("back").onclick = showHome;
+    .book::after {
+      content: "";
+      position: absolute;
+      right: -13px;
+      top: 7px;
+      width: 12px;
+      height: calc(100% - 14px);
+      border-radius: 0 5px 5px 0;
+      background: repeating-linear-gradient(to bottom, #f5f6ff 0 3px, #c5d0ef 4px 5px);
+    }
 
-  const list = document.getElementById("items");
+    .book-label {
+      display: inline-block;
+      margin-bottom: 27px;
+      padding: 5px 8px;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
-  subjects[semester].forEach(subject => {
-    list.appendChild(
-      makeButton(subject, () => showYears(semester, subject))
-    );
-  });
-}
+    .book h3 {
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
 
-/* SHOW EXAMINATION YEARS */
+    .book p {
+      margin-top: 13px;
+      color: #dbe5ff;
+      font-size: 10px;
+    }
 
-function showYears(semester, subject) {
-  content.innerHTML = `
-    <button class="back" id="back">← Back</button>
-    <h2>${subject}</h2>
-    <p>Select an examination year.</p>
-    <div id="items" class="items"></div>
-  `;
+    .book-cap {
+      position: absolute;
+      right: -45px;
+      bottom: 30px;
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(18, 29, 62, .92);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+      font-size: 11px;
+      font-weight: 800;
+      animation: floatBook 4s ease-in-out infinite reverse;
+    }
 
-  document.getElementById("back").onclick =
-    () => showSubjects(semester);
+    .section {
+      padding: 50px 0 65px;
+      scroll-margin-top: 90px;
+    }
 
-  const list = document.getElementById("items");
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
 
-  ["2025", "2024", "2023", "2022", "2021"].forEach(year => {
-    list.appendChild(
-      makeButton(year, () => showPaper(semester, subject, year))
-    );
-  });
-}
+    .section-heading h2 {
+      font-size: clamp(25px, 4vw, 35px);
+      line-height: 1.2;
+      letter-spacing: -1.2px;
+    }
 
-/* SHOW QUESTION PAPER JPG PAGES */
+    .section-heading p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-function showPaper(semester, subject, year) {
-  content.innerHTML = `
-    <button class="back" id="back">← Back</button>
-    <h2>${subject}</h2>
-    <p>${semester} | Examination Year: ${year}</p>
-    <div id="paperContent"></div>
-  `;
+    .section-tag {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
 
-  document.getElementById("back").onclick =
-    () => showYears(semester, subject);
+    .search-wrap {
+      position: relative;
+      margin: 26px 0 30px;
+    }
 
-  const paperContent = document.getElementById("paperContent");
-  const key = `${semester}|${subject}|${year}`;
-  const pages = papers[key] || [];
+    .search-wrap span {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+    }
 
-  if (pages.length === 0) {
-    paperContent.innerHTML = `
-      <div class="note">
-        <strong>Unavailable</strong><br>
-        This question paper has not been added yet.
-      </div>
-    `;
-    return;
-  }
+    .search-input {
+      width: 100%;
+      min-height: 58px;
+      padding: 15px 18px 15px 52px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(18, 28, 57, .8);
+      color: white;
+      outline: none;
+      font-size: 14px;
+      transition: border-color .2s, box-shadow .2s;
+    }
 
-  pages.forEach((url, index) => {
-    const image = document.createElement("img");
-    image.className = "paper";
-    image.src = url;
-    image.alt = `Question paper page ${index + 1}`;
-    image.loading = "lazy";
-    paperContent.appendChild(image);
-  });
-}
+    .search-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(67, 133, 255, .1);
+    }
 
-showHome();
-</script>
-<script type="module">
-  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+    .semester-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
 
-  const SUPABASE_URL = "https://zbxcurmbrywnagjikyil.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_53TSZ3IFVaFavTbWu83_sg_pXHKQBtA";
+    .semester-card {
+      min-height: 218px;
+      position: relative;
+      overflow: hidden;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(24, 38, 77, .95), rgba(13, 20, 44, .96));
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .15), inset 0 1px rgba(255,255,255,.04);
+      cursor: pointer;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      transform-style: preserve-3d;
+    }
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    .semester-card::before {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      top: -75px;
+      right: -55px;
+      border-radius: 50%;
+      background: var(--glow, rgba(67,133,255,.35));
+      filter: blur(4px);
+      transition: transform .4s;
+    }
 
-  window.supabaseClient = supabase;
-  console.log("Supabase connection is ready!");
-</script>
+    .semester-card:hover {
+      transform: translateY(-8px) rotateX(2deg);
+      border-color: rgba(104, 145, 255, .6);
+      box-shadow: 0 22px 45px rgba(28, 57, 132, .28);
+    }
 
-  <section id="upload-paper">
-  <h2>Upload Question Paper</h2>
+    .semester-card:hover::before {
+      transform: scale(1.5);
+    }
 
-  <label>Semester</label>
-  <select id="semester">
-    <option>Semester I</option>
-    <option>Semester II</option>
-    <option>Semester III</option>
-    <option>Semester IV</option>
-  </select>
+    .semester-card:nth-child(2) { --glow: rgba(160, 88, 255, .4); }
+    .semester-card:nth-child(3) { --glow: rgba(49, 222, 231, .3); }
+    .semester-card:nth-child(4) { --glow: rgba(255, 115, 182, .3); }
 
-  <br><br>
+    .semester-icon {
+      position: relative;
+      z-index: 1;
+      width: 51px;
+      height: 51px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 16px;
+      background: rgba(255,255,255,.07);
+      font-size: 25px;
+    }
 
-  <label>Subject</label>
-  <input id="subject" type="text" placeholder="Enter subject name">
+    .semester-card h3 {
+      margin-top: 23px;
+      font-size: 19px;
+      font-weight: 800;
+    }
 
-  <br><br>
+    .semester-card p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
 
-  <label>Exam Year</label>
-  <select id="examYear">
-    <option>2025</option>
-    <option>2024</option>
-    <option>2023</option>
-    <option>2022</option>
-    <option>2021</option>
-    <option>2020</option>
-    <option>2019</option>
-    <option>2018</option>
-    <option>2017</option>
-  </select>
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      color: #b6c9ff;
+      font-size: 11px;
+      font-weight: 700;
+    }
 
-  <br><br>
+    .arrow-circle {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+    }
 
-  <label>Question Paper Images (JPG)</label>
-  <input id="paperImages" type="file" accept=".jpg,.jpeg,image/jpeg" multiple>
+    .library-panel {
+      margin-top: 32px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      background: linear-gradient(145deg, rgba(17, 27, 55, .94), rgba(12, 18, 39, .97));
+      animation: reveal .35s ease both;
+    }
 
-  <br><br>
+    .panel-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
 
-  <button id="uploadButton" type="button">Upload Paper</button>
-  <p id="uploadMessage"></p>
-  </section>
-</body>
-</html>
+    .panel-top h3 {
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    .panel-top p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .back-btn {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #172344;
+      color: #d9e4ff;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+    }
+
+    .subject-btn {
+      width: 100%;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(28, 41, 78, .5);
+      color: #edf1ff;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+
+    .subject-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue);
+      background: rgba(49, 84, 158, .25);
+    }
+
+    .subject-btn span:last-child {
+      color: var(--cyan);
+      font-size: 19px;
+    }
+
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .year-btn {
+      padding: 18px 10px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(29, 43, 83, .65);
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      transition: all .2s;
+    }
+
+    .year-btn:hover {
+      border-color: var(--purple);
+      background: rgba(112, 73, 219, .22);
+      transform: translateY(-3px);
+    }
+
+    .year-btn small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .paper-viewer {
+      margin-top: 22px;
+    }
+
+    .paper-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .paper-info h4 {
+      font-size: 16px;
+    }
+
+    .paper-info p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .paper-pages {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .paper-page {
+      display: block;
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      border-radius: 5px;
+      background: white;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .3);
+    }
+
+    .empty-state {
+      padding: 35px 18px;
+      border: 1px dashed rgba(145, 170, 255, .3);
+      border-radius: 16px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .empty-state strong {
+      display: block;
+      margin-bottom: 7px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .upload-section {
+      padding: 28px;
+      border: 1px solid rgba(115, 112, 255, .3);
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at 100% 0, rgba(138, 79, 255, .14), transparent 36%),
+        linear-gradient(145deg, #121d3c, #0d142d);
+    }
+
+    .upload-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .upload-copy h2 {
+      margin-top: 12px;
+      font-size: clamp(25px, 3vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .upload-copy p {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .upload-points {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      color: #dbe5ff;
+      font-size: 12px;
+    }
+
+    .upload-points span::before {
+      content: "✓";
+      margin-right: 9px;
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .upload-form {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: rgba(8, 14, 32, .5);
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field label {
+      color: #d9e2ff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #121e3b;
+      color: white;
+      font-size: 12px;
+    }
+
+    .field select option {
+      background: #121e3b;
+      color: white;
+    }
+
+    .field input[type="file"] {
+      padding: 10px;
+      color: var(--muted);
+    }
+
+    .file-help {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .upload-progress {
+      display: none;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #273353;
+    }
+
+    .upload-progress.active {
+      display: block;
+    }
+
+    .upload-progress div {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      transition: width .2s;
+    }
+
+    .status-message {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      border: 1px solid rgba(63, 221, 166, .25);
+      background: rgba(63, 221, 166, .08);
+      color: #87f5c8;
+    }
+
+    .status-message.error {
+      border: 1px solid rgba(255, 111, 132, .25);
+      background: rgba(255, 111, 132, .08);
+      color: #ffb1bd;
+    }
+
+    .upload-submit {
+      width: 100%;
+      border: none;
+    }
+
+    .upload-submit:disabled {
+      cursor: wait;
+      opacity: .6;
+      transform: none;
+    }
+
+    .note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 30px 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .footer strong {
+      color: #dfe7ff;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 100;
+      max-width: min(360px, calc(100% - 40px));
+      padding: 13px 17px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #182647;
+      color: white;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .3);
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes floatBook {
+      0%, 100% { transform: translateY(0) rotateZ(-1deg); }
+      50% { transform: translateY(-13px) rotateZ(1deg); }
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(-32deg); }
+      to { transform: rotate(328deg); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(.94); opacity: .65; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr .7fr;
+        gap: 15px;
+        padding-top: 55px;
+      }
+
+      .hero-visual {
+        transform: scale(.85);
+      }
+
+      .semester-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .upload-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 26px, 1120px);
+      }
+
+      .nav {
+        min-height: 66px;
+      }
+
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand {
+        font-size: 13px;
+      }
+
+      .nav-links {
+        gap: 11px;
+        font-size: 11px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 9px 11px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+        padding-bottom: 35px;
+        gap: 0;
+      }
+
+      h1 {
+        font-size: clamp(39px, 12vw, 57px);
+        letter-spacing: -2px;
+      }
+
+      .hero-copy {
+        font-size: 13px;
+      }
+
+      .hero-visual {
+       
