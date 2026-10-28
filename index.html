@@ -307,6 +307,16 @@ function showPaper(semester, subject, year) {
 
 showHome();
 </script>
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+  const SUPABASE_URL = "https://zbxcurmbrywnagjikyil.supabase.co";
+  const SUPABASE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  window.supabaseClient = supabase;
+  console.log("Supabase connection is ready!");
+</script>
 </body>
 </html>
