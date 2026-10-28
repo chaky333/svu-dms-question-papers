@@ -318,5 +318,47 @@ showHome();
   window.supabaseClient = supabase;
   console.log("Supabase connection is ready!");
 </script>
+
+  <section id="upload-paper">
+  <h2>Upload Question Paper</h2>
+
+  <label>Semester</label>
+  <select id="semester">
+    <option>Semester I</option>
+    <option>Semester II</option>
+    <option>Semester III</option>
+    <option>Semester IV</option>
+  </select>
+
+  <br><br>
+
+  <label>Subject</label>
+  <input id="subject" type="text" placeholder="Enter subject name">
+
+  <br><br>
+
+  <label>Exam Year</label>
+  <select id="examYear">
+    <option>2025</option>
+    <option>2024</option>
+    <option>2023</option>
+    <option>2022</option>
+    <option>2021</option>
+    <option>2020</option>
+    <option>2019</option>
+    <option>2018</option>
+    <option>2017</option>
+  </select>
+
+  <br><br>
+
+  <label>Question Paper Images (JPG)</label>
+  <input id="paperImages" type="file" accept=".jpg,.jpeg,image/jpeg" multiple>
+
+  <br><br>
+
+  <button id="uploadButton" type="button">Upload Paper</button>
+  <p id="uploadMessage"></p>
+  </section>
 </body>
 </html>
