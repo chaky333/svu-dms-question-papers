@@ -1,31 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SVU DMS | MBA Question Paper Library</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
-  --navy: #173b67;
-  --blue: #245b91;
-  --light: #f3f6fa;
-  --white: #ffffff;
-  --ink: #202b3a;
-  --muted: #657386;
-  --line: #dce3eb;
+  --navy: #172554;
+  --steel: #344B70;
+  --silver: #C0C7D1;
+  --ice: #F4F6FA;
+  --slate: #52627A;
+  --white: #FFFFFF;
 }
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--light);
-  color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
+  background: var(--ice);
+  color: var(--navy);
   line-height: 1.6;
 }
 
@@ -33,606 +39,767 @@ button, input, select {
   font: inherit;
 }
 
-button, a {
+button {
   cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: min(1080px, calc(100% - 36px));
-  margin: auto;
 }
 
 /* HEADER */
 
 header {
-  background: white;
-  border-bottom: 1px solid var(--line);
-}
-
-.nav {
-  min-height: 70px;
+  background: var(--navy);
+  color: white;
+  padding: 18px 7%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
-}
-
-.brand {
-  color: var(--navy);
-  font-size: 19px;
-  font-weight: 700;
-}
-
-.brand small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 22px;
-  font-size: 14px;
-}
-
-/* HERO */
-
-.hero {
-  background: white;
-  border-bottom: 1px solid var(--line);
-}
-
-.hero-inner {
-  padding: 55px 0;
-}
-
-.kicker {
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-h1 {
-  margin-top: 12px;
-  color: var(--navy);
-  font-size: clamp(32px, 5vw, 48px);
-  line-height: 1.2;
-}
-
-.hero p {
-  max-width: 700px;
-  margin-top: 14px;
-  color: var(--muted);
-  font-size: 15px;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-.button {
-  display: inline-block;
-  padding: 10px 17px;
-  border: 1px solid var(--navy);
-  border-radius: 5px;
-  background: white;
-  color: var(--navy);
-  font-size: 14px;
-  font-weight: 700;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
 }
 
-.button-primary {
-  background: var(--navy);
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--silver);
+  color: var(--silver);
+  display: grid;
+  place-items: center;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.brand h2 {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  letter-spacing: 1px;
+}
+
+.brand p {
+  color: var(--silver);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+nav a {
   color: white;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* HOMEPAGE HERO */
+
+.hero {
+  min-height: 490px;
+  background:
+    linear-gradient(90deg, rgba(23,37,84,.94), rgba(23,37,84,.60)),
+    url("https://svuniversity.edu.in/storage/2022/04/Business-Management--scaled.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 65px 8%;
+  color: white;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.eyebrow {
+  color: var(--silver);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(35px, 6vw, 58px);
+  line-height: 1.15;
+  margin-bottom: 22px;
+}
+
+.hero p {
+  color: #E1E6EF;
+  max-width: 560px;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.primary-btn {
+  display: inline-block;
+  background: var(--silver);
+  color: var(--navy);
+  padding: 13px 25px;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13px;
 }
 
 /* GENERAL SECTIONS */
 
-main {
-  padding-bottom: 45px;
-}
-
 .section {
-  padding: 38px 0 12px;
+  padding: 75px 7%;
 }
 
-h2 {
+.section-heading {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.section-heading .eyebrow {
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.section-heading h2 {
+  font-family: Georgia, serif;
+  font-size: 34px;
   color: var(--navy);
-  font-size: 26px;
 }
 
-.description {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 14px;
+.section-heading p {
+  color: var(--slate);
+  margin-top: 9px;
 }
 
-.search {
+/* ABOUT SECTION */
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.about-image img {
   width: 100%;
-  min-height: 46px;
-  margin: 20px 0;
-  padding: 11px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 5px;
-  background: white;
-  outline: none;
+  height: 320px;
+  object-fit: cover;
+  display: block;
 }
 
-/* SEMESTERS */
+.about-text h2 {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+
+.about-text p {
+  color: var(--slate);
+  margin-bottom: 14px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.stat {
+  border-left: 3px solid var(--silver);
+  padding-left: 12px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 25px;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--slate);
+}
+
+/* SEMESTER CARDS */
+
+.semester-section {
+  background: white;
+}
 
 .semester-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 20px;
 }
 
 .semester-card {
-  min-height: 130px;
-  padding: 18px;
+  background: var(--steel);
+  color: white;
+  padding: 28px 20px;
+  min-height: 185px;
+  border: 1px solid #526989;
   text-align: left;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: white;
-  color: var(--ink);
+  cursor: pointer;
 }
 
-.semester-card:hover {
-  border-color: var(--blue);
+.semester-card:hover,
+.semester-card.active {
+  border: 2px solid var(--silver);
+  background: var(--navy);
 }
 
-.semester-card span {
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 700;
+.semester-number {
+  display: block;
+  color: var(--silver);
+  font-family: Georgia, serif;
+  font-size: 45px;
+  line-height: 1.2;
+  margin-bottom: 15px;
 }
 
 .semester-card h3 {
-  margin-top: 10px;
-  color: var(--navy);
-  font-size: 18px;
+  font-size: 17px;
+  margin-bottom: 5px;
 }
 
 .semester-card p {
-  color: var(--muted);
+  color: #D7DFEA;
   font-size: 12px;
 }
 
-/* LIBRARY PANEL */
+/* LIBRARY */
 
-.panel {
-  margin-top: 22px;
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: white;
+.library-section {
+  background: var(--ice);
 }
 
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.library-controls {
+  max-width: 850px;
+  margin: 0 auto 35px;
+  display: grid;
+  grid-template-columns: 1fr 200px;
   gap: 12px;
-  margin-bottom: 18px;
 }
 
-.panel-label {
-  color: var(--blue);
-  font-size: 11px;
-  font-weight: 700;
+.library-controls input,
+.library-controls select,
+.upload-form input,
+.upload-form select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #D1D8E2;
+  background: white;
+  color: var(--navy);
+  outline: none;
 }
 
-.panel-title {
-  margin-top: 4px;
-  font-size: 22px;
+.library-controls input:focus,
+.library-controls select:focus,
+.upload-form input:focus,
+.upload-form select:focus {
+  border-color: var(--steel);
+}
+
+.semester-title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.semester-title h2 {
+  font-family: Georgia, serif;
+  font-size: 27px;
+}
+
+.semester-title p {
+  color: var(--slate);
+  font-size: 13px;
 }
 
 .subject-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 9px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
 
-.subject-button,
-.year-button {
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
+.subject-card {
   background: white;
-  color: var(--ink);
+  padding: 22px;
+  border: 1px solid #E0E5ED;
+  border-left: 4px solid var(--steel);
+  cursor: pointer;
   text-align: left;
+  color: var(--navy);
+}
+
+.subject-card:hover,
+.subject-card.selected {
+  background: #E9EDF4;
+  border-left-color: var(--navy);
+}
+
+.subject-card h3 {
   font-size: 13px;
-  font-weight: 600;
+  line-height: 1.5;
 }
 
-.subject-button:hover,
-.year-button:hover {
-  border-color: var(--blue);
-  background: #eaf1f8;
-}
-
-.year-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 9px;
-  margin-top: 14px;
-}
-
-.year-button {
-  text-align: center;
-  font-size: 15px;
-}
-
-.paper-pages {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  margin-top: 18px;
-}
-
-.paper-pages img {
+.subject-card span {
   display: block;
-  width: 100%;
-  max-width: 820px;
-  height: auto;
-  border: 1px solid var(--line);
+  color: var(--slate);
+  font-size: 11px;
+  margin-top: 8px;
 }
 
-.empty {
-  width: 100%;
-  padding: 25px 15px;
-  border: 1px dashed #c5cfdb;
-  border-radius: 5px;
-  color: var(--muted);
+/* EXAMINATION ARCHIVE */
+
+.archive {
+  margin-top: 40px;
+  background: white;
+  padding: 28px;
+  border: 1px solid #E0E5ED;
+}
+
+.archive h3 {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+
+.archive-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.archive-filters select {
+  padding: 11px;
+  border: 1px solid #D1D8E2;
+  min-width: 170px;
+  color: var(--navy);
+  background: white;
+}
+
+.paper-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.paper-card {
+  border: 1px solid #E0E5ED;
+  padding: 18px;
+}
+
+.paper-card h4 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.paper-card p {
+  color: var(--slate);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.paper-card a {
+  color: var(--navy);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.empty-message {
+  color: var(--slate);
   text-align: center;
-}
-
-.hidden {
-  display: none !important;
+  padding: 25px;
+  grid-column: 1 / -1;
 }
 
 /* UPLOAD SECTION */
 
 .upload-section {
-  margin-top: 38px;
-  padding: 26px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: white;
+  background: var(--navy);
+  color: white;
 }
 
-.upload-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 28px;
+.upload-section .section-heading h2 {
+  color: white;
 }
 
-.upload-copy p {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
+.upload-section .section-heading p {
+  color: var(--silver);
 }
 
 .upload-form {
-  display: grid;
-  gap: 13px;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  background: #f9fbfd;
-}
-
-.field {
-  display: grid;
-  gap: 5px;
-}
-
-.field label {
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.field input,
-.field select {
-  width: 100%;
-  min-height: 42px;
-  padding: 9px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 5px;
+  max-width: 650px;
+  margin: auto;
   background: white;
-  color: var(--ink);
+  color: var(--navy);
+  padding: 30px;
 }
 
-.help {
-  color: var(--muted);
-  font-size: 11px;
+.form-group {
+  margin-bottom: 18px;
 }
 
-.status {
-  display: none;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
-
-.status.show {
+.form-group label {
   display: block;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 7px;
 }
 
-.status.ok {
-  background: #e8f5ee;
-  color: #176b48;
+.form-note {
+  color: var(--slate);
+  font-size: 12px;
+  margin-top: 6px;
 }
 
-.status.error {
-  background: #fff0f0;
-  color: #a12d36;
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--steel);
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+#uploadMessage {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+  overflow-wrap: anywhere;
 }
 
 /* FOOTER */
 
 footer {
-  margin-top: 35px;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
-  background: white;
-  color: var(--muted);
+  background: #101B3D;
+  color: white;
+  padding: 35px 7%;
   text-align: center;
+}
+
+footer h3 {
+  font-family: Georgia, serif;
+  margin-bottom: 8px;
+}
+
+footer p {
+  color: var(--silver);
   font-size: 12px;
+}
+
+footer a {
+  color: var(--silver);
+  text-decoration: none;
 }
 
 /* MOBILE RESPONSIVE */
 
-@media(max-width: 800px) {
+@media (max-width: 850px) {
   .semester-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .upload-layout {
-    grid-template-columns: 1fr;
+  .subject-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .year-grid {
-    grid-template-columns: repeat(4, 1fr);
+  .about {
+    grid-template-columns: 1fr;
   }
 }
 
-@media(max-width: 560px) {
-  .nav {
-    min-height: 64px;
+@media (max-width: 560px) {
+  header {
+    padding: 15px 5%;
   }
 
-  .nav-links {
-    gap: 12px;
-    font-size: 12px;
+  nav {
+    gap: 14px;
   }
 
-  .hero-inner {
-    padding: 38px 0;
+  .hero {
+    min-height: 430px;
+    padding: 50px 7%;
   }
 
-  .semester-card {
-    padding: 13px;
+  .section {
+    padding: 55px 5%;
   }
 
-  .semester-card h3 {
-    font-size: 16px;
+  .section-heading h2 {
+    font-size: 28px;
   }
 
-  .panel {
-    padding: 14px;
-  }
-
-  .subject-grid {
+  .semester-grid,
+  .subject-grid,
+  .paper-list {
     grid-template-columns: 1fr;
   }
 
-  .year-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .library-controls {
+    grid-template-columns: 1fr;
   }
 
-  .upload-section {
-    padding: 16px;
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-form {
+    padding: 20px;
   }
 }
 </style>
 </head>
-
+  
 <body>
 
 <header>
-  <div class="container nav">
-    <a class="brand" href="#">
-      SVU DMS
-      <small>MBA QUESTION PAPER LIBRARY</small>
-    </a>
-
-    <nav class="nav-links">
-      <a href="#library">Question Papers</a>
-      <a href="#share">Contribute</a>
-    </nav>
+  <div class="brand">
+    <div class="brand-mark">SVU</div>
+    <div>
+      <h2>SVU DMS</h2>
+      <p>QUESTION PAPER LIBRARY</p>
+    </div>
   </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#semesters">Semesters</a>
+    <a href="#library">Library</a>
+    <a href="#upload">Upload Papers</a>
+  </nav>
 </header>
 
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="kicker">
-      Sri Venkateswara University · Department of Management Studies
-    </div>
+<main>
 
-    <h1>MBA Question Paper Library</h1>
-
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">Sri Venkateswara University · Tirupati</div>
+    <h1>Preserving Knowledge. Supporting Excellence.</h1>
     <p>
-      Find previous examination question papers by semester,
-      subject and year. Browse the collection or contribute
-      papers to help fellow students prepare.
+      Welcome to the Department of Management Studies MBA Question Paper
+      Library. Explore previous examination papers, prepare with confidence,
+      and contribute to a shared academic resource.
     </p>
+    <a href="#semesters" class="primary-btn">EXPLORE LIBRARY</a>
+  </div>
+</section>
 
-    <div class="hero-actions">
-      <a class="button button-primary" href="#library">
-        Browse Question Papers
-      </a>
+<section class="section" id="about">
+  <div class="about">
+    <div class="about-image">
+      <img
+        src="https://svuniversity.edu.in/storage/2022/04/Business-Management--scaled.jpg"
+        alt="SVU College of Commerce, Management and Computer Science building">
+    </div>
 
-      <a class="button" href="#share">
-        Share a Question Paper
-      </a>
+    <div class="about-text">
+      <div class="eyebrow">Academic Resource Centre</div>
+      <h2>About the Library</h2>
+      <p>
+        The SVU DMS MBA Question Paper Library is a student-focused
+        academic resource created to make previous examination papers
+        easier to access.
+      </p>
+      <p>
+        Browse subjects semester-wise, explore available examination
+        years, and view question papers in one organised place.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>04</strong>
+          <span>Semesters</span>
+        </div>
+        <div class="stat">
+          <strong>41</strong>
+          <span>Subjects</span>
+        </div>
+        <div class="stat">
+          <strong>09</strong>
+          <span>Exam Years</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<main class="container">
+<section class="section semester-section" id="semesters">
+  <div class="section-heading">
+    <div class="eyebrow">Explore Academics</div>
+    <h2>Choose Your Semester</h2>
+    <p>Select a semester to explore its MBA subjects and question papers.</p>
+  </div>
 
-<section class="section" id="library">
+  <div class="semester-grid" id="semesterCards">
+    <button class="semester-card" data-semester="Semester I">
+      <span class="semester-number">01</span>
+      <h3>Semester I</h3>
+      <p>8 Subjects</p>
+    </button>
 
-  <h2>Question Paper Collection</h2>
-  <p class="description">
-    Select a semester or search for a subject.
-  </p>
+    <button class="semester-card" data-semester="Semester II">
+      <span class="semester-number">02</span>
+      <h3>Semester II</h3>
+      <p>8 Subjects</p>
+    </button>
 
-  <input
-    id="searchInput"
-    class="search"
-    type="search"
-    placeholder="Search subjects..."
-  >
+    <button class="semester-card" data-semester="Semester III">
+      <span class="semester-number">03</span>
+      <h3>Semester III</h3>
+      <p>11 Subjects</p>
+    </button>
 
-  <div class="semester-grid" id="semesterGrid"></div>
-
-  <div class="panel hidden" id="libraryPanel">
-
-    <div class="panel-header">
-      <div>
-        <div class="panel-label" id="panelLabel"></div>
-        <h2 class="panel-title" id="panelTitle"></h2>
-        <p class="description" id="panelDescription"></p>
-      </div>
-
-      <button class="button" id="backButton" type="button">
-        Back
-      </button>
-    </div>
-
-    <div class="subject-grid" id="subjectGrid"></div>
-
-    <div class="hidden" id="yearSection">
-      <h2 class="panel-title">Select Examination Year</h2>
-      <div class="year-grid" id="yearGrid"></div>
-    </div>
-
-    <div class="hidden" id="paperSection">
-      <h2 class="panel-title" id="paperTitle"></h2>
-      <p class="description" id="paperDescription"></p>
-      <div class="paper-pages" id="paperPages"></div>
-    </div>
-
+    <button class="semester-card" data-semester="Semester IV">
+      <span class="semester-number">04</span>
+      <h3>Semester IV</h3>
+      <p>14 Subjects</p>
+    </button>
   </div>
 </section>
 
-<section class="upload-section" id="share">
+<section class="section library-section" id="library">
+  <div class="section-heading">
+    <div class="eyebrow">Question Paper Collection</div>
+    <h2>Academic Library</h2>
+    <p>Search for a subject and explore available examination papers.</p>
+  </div>
 
-  <div class="upload-layout">
+  <div class="library-controls">
+    <input type="search" id="searchInput"
+      placeholder="Search subject name...">
 
-    <div class="upload-copy">
-      <div class="kicker">Contribute to the Collection</div>
+    <select id="semesterFilter">
+      <option value="all">All Semesters</option>
+      <option value="Semester I">Semester I</option>
+      <option value="Semester II">Semester II</option>
+      <option value="Semester III">Semester III</option>
+      <option value="Semester IV">Semester IV</option>
+    </select>
+  </div>
 
-      <h2>Share a Question Paper</h2>
+  <div class="semester-title">
+    <h2 id="currentSemesterTitle">All MBA Subjects</h2>
+    <p id="subjectCount">41 subjects available</p>
+  </div>
 
-      <p>
-        Have a previous examination paper?
-        Upload clear JPG or JPEG images with the correct
-        semester, subject and examination year.
+  <div class="subject-grid" id="subjectGrid"></div>
+
+  <div class="archive" id="archive">
+    <h3 id="archiveTitle">Examination Archive</h3>
+
+    <div class="archive-filters">
+      <select id="yearFilter">
+        <option value="all">All Examination Years</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+      </select>
+    </div>
+
+    <div class="paper-list" id="paperList">
+      <p class="empty-message">
+        Select a subject to explore available question papers.
       </p>
+    </div>
+  </div>
+</section>
 
-      <p>
-        You can upload up to 20 images for one paper.
-        An internet connection is required.
+<section class="section upload-section" id="upload">
+  <div class="section-heading">
+    <div class="eyebrow">Share Academic Resources</div>
+    <h2>Contribute to Academic Knowledge</h2>
+    <p>
+      Help fellow MBA students by sharing previous examination papers.
+    </p>
+  </div>
+
+  <form class="upload-form" id="uploadForm">
+    <div class="form-group">
+      <label for="uploadSemester">Select Semester</label>
+      <select id="uploadSemester" required>
+        <option value="">Choose Semester</option>
+        <option>Semester I</option>
+        <option>Semester II</option>
+        <option>Semester III</option>
+        <option>Semester IV</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="uploadSubject">Select Subject</label>
+      <select id="uploadSubject" required>
+        <option value="">Choose Subject</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="uploadYear">Examination Year</label>
+      <select id="uploadYear" required>
+        <option value="">Choose Year</option>
+        <option>2025</option>
+        <option>2024</option>
+        <option>2023</option>
+        <option>2022</option>
+        <option>2021</option>
+        <option>2020</option>
+        <option>2019</option>
+        <option>2018</option>
+        <option>2017</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="paperFiles">Upload Question Paper Images</label>
+      <input type="file" id="paperFiles"
+        accept=".jpg,.jpeg,image/jpeg" multiple required>
+      <p class="form-note">
+        JPG or JPEG images only. Maximum 20 images, 8 MB each.
       </p>
     </div>
 
-    <form class="upload-form" id="uploadForm">
+    <button class="submit-btn" type="submit" id="submitButton">
+      SUBMIT QUESTION PAPERS
+    </button>
 
-      <div class="field">
-        <label for="uploadSemester">Semester</label>
-        <select id="uploadSemester" required>
-          <option value="">Select semester</option>
-          <option>Semester I</option>
-          <option>Semester II</option>
-          <option>Semester III</option>
-          <option>Semester IV</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="uploadSubject">Subject</label>
-        <select id="uploadSubject" required disabled>
-          <option value="">Select semester first</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="uploadYear">Examination Year</label>
-        <select id="uploadYear" required>
-          <option value="">Select year</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label for="paperImages">Question Paper Images</label>
-        <input
-          id="paperImages"
-          type="file"
-          accept=".jpg,.jpeg,image/jpeg"
-          multiple
-          required
-        >
-        <span class="help">
-          JPG/JPEG only · Maximum 20 images · 8 MB per image
-        </span>
-      </div>
-
-      <button class="button button-primary" id="uploadButton" type="submit">
-        Submit Question Paper
-      </button>
-
-      <div class="status" id="uploadStatus" role="status"></div>
-
-    </form>
-  </div>
+    <div id="uploadMessage" role="status"></div>
+  </form>
 </section>
 
 </main>
 
 <footer>
-  SVU DMS MBA Question Paper Library · A student contribution initiative
+  <h3>SVU DMS Question Paper Library</h3>
+  <p>Department of Management Studies</p>
+  <p>Sri Venkateswara University, Tirupati</p>
+  <p style="margin-top:15px;">
+    Academic Resource for MBA Students
+  </p>
+  <p style="margin-top:8px;">
+    © 2026 SVU DMS. All Rights Reserved.
+  </p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-"use strict";
 
-const SUPABASE_URL =
-  "https://zbxcurmbrywnagjikyil.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_53TSZ3IFVaFavTbWu83_sg_pXHKQBtA";
-
-const BUCKET = "Question-Papers";
+// MBA SUBJECTS
 
 const subjects = {
-
   "Semester I": [
     "MANAGEMENT AND ORGANIZATIONAL BEHAVIOUR",
     "MANAGERIAL COMMUNICATION",
@@ -685,355 +852,418 @@ const subjects = {
     "Global Human Resource Management",
     "Stress Management"
   ]
-
 };
 
-const years = Array.from(
-  {length: 9},
-  (_, i) => 2025 - i
-);
+// LIBRARY NAVIGATION
 
-const byId = id => document.getElementById(id);
+let selectedSemester = "all";
+let selectedSubject = null;
+let allPapers = [];
 
-const escapeHtml = value =>
-  String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[char]));
+const subjectGrid = document.getElementById("subjectGrid");
+const semesterFilter = document.getElementById("semesterFilter");
+const searchInput = document.getElementById("searchInput");
+const yearFilter = document.getElementById("yearFilter");
 
-let supabaseClient = null;
-let selectedSemester = "";
-let selectedSubject = "";
+function renderSubjects() {
+  const search = searchInput.value.toLowerCase().trim();
+  const semester = semesterFilter.value;
 
-function showUploadStatus(message, success) {
-  const box = byId("uploadStatus");
-  box.textContent = message;
-  box.className =
-    "status show " + (success ? "ok" : "error");
-}
+  subjectGrid.innerHTML = "";
 
-function renderSemesters() {
+  let count = 0;
 
-  const names = Object.keys(subjects);
-  const roman = ["I", "II", "III", "IV"];
-
-  byId("semesterGrid").innerHTML =
-    names.map((semester, index) => `
-      <button
-        type="button"
-        class="semester-card"
-        data-semester="${escapeHtml(semester)}"
-      >
-        <span>SEMESTER ${roman[index]}</span>
-        <h3>${escapeHtml(semester)}</h3>
-        <p>${subjects[semester].length} subjects</p>
-      </button>
-    `).join("");
-
-}
-
-function renderSubjects(list) {
-
-  byId("subjectGrid").innerHTML =
-    list.map(subject => `
-      <button
-        type="button"
-        class="subject-button"
-        data-subject="${escapeHtml(subject)}"
-      >
-        ${escapeHtml(subject)}
-      </button>
-    `).join("") ||
-    '<div class="empty">No matching subjects found.</div>';
-
-}
-
-function openSemester(semester) {
-
-  selectedSemester = semester;
-  selectedSubject = "";
-
-  byId("libraryPanel").classList.remove("hidden");
-
-  byId("panelLabel").textContent =
-    semester.toUpperCase();
-
-  byId("panelTitle").textContent =
-    "Select a Subject";
-
-  byId("panelDescription").textContent =
-    "Choose a subject to view available examination years.";
-
-  byId("subjectGrid").classList.remove("hidden");
-  byId("yearSection").classList.add("hidden");
-  byId("paperSection").classList.add("hidden");
-
-  byId("backButton").textContent = "All Semesters";
-
-  renderSubjects(subjects[semester]);
-
-  byId("libraryPanel").scrollIntoView({
-    block: "start"
-  });
-
-}
-
-function openSubject(subject) {
-
-  selectedSubject = subject;
-
-  byId("panelTitle").textContent = subject;
-
-  byId("panelDescription").textContent =
-    "Select the examination year.";
-
-  byId("subjectGrid").classList.add("hidden");
-  byId("yearSection").classList.remove("hidden");
-  byId("paperSection").classList.add("hidden");
-
-  byId("backButton").textContent = "Back to Subjects";
-
-  byId("yearGrid").innerHTML =
-    years.map(year => `
-      <button
-        type="button"
-        class="year-button"
-        data-year="${year}"
-      >
-        ${year}
-      </button>
-    `).join("");
-
-}
-
-async function openPaper(year) {
-
-  byId("paperSection").classList.remove("hidden");
-
-  byId("paperTitle").textContent = selectedSubject;
-
-  byId("paperDescription").textContent =
-    "Examination Year: " + year;
-
-  byId("paperPages").innerHTML =
-    '<div class="empty">Loading question paper...</div>';
-
-  if (!supabaseClient) {
-    byId("paperPages").innerHTML =
-      '<div class="empty">Paper service is unavailable. Please check your internet connection.</div>';
-    return;
-  }
-
-  try {
-
-    const {data, error} = await supabaseClient
-      .from("paper_submissions")
-      .select("image_paths")
-      .eq("semester", selectedSemester)
-      .eq("subject", selectedSubject)
-      .eq("exam_year", Number(year))
-      .eq("status", "approved")
-      .order("submitted_at", {ascending: false});
-
-    if (error) throw error;
-
-    const paths = (data || []).flatMap(
-      row => row.image_paths || []
-    );
-
-    if (!paths.length) {
-      byId("paperPages").innerHTML =
-        '<div class="empty">No paper has been uploaded for this subject and year yet.</div>';
-      return;
-    }
-
-    byId("paperPages").innerHTML = paths.map(path => {
-
-      const result =
-        supabaseClient.storage
-          .from(BUCKET)
-          .getPublicUrl(path);
-
-      return `
-        <img
-          loading="lazy"
-          src="${escapeHtml(result.data.publicUrl)}"
-          alt="Question paper page"
-        >
-      `;
-
-    }).join("");
-
-  } catch (error) {
-
-    console.error(error);
-
-    byId("paperPages").innerHTML =
-      '<div class="empty">Unable to load papers. Please try again later.</div>';
-
-  }
-
-}
-
-/* SEMESTER SELECTION */
-
-byId("semesterGrid").addEventListener("click", event => {
-
-  const button = event.target.closest("[data-semester]");
-
-  if (button) {
-    openSemester(button.dataset.semester);
-  }
-
-});
-
-/* SUBJECT SELECTION */
-
-byId("subjectGrid").addEventListener("click", event => {
-
-  const result = event.target.closest("[data-result-subject]");
-
-  if (result) {
-    selectedSemester = result.dataset.resultSemester;
-    openSubject(result.dataset.resultSubject);
-    return;
-  }
-
-  const button = event.target.closest("[data-subject]");
-
-  if (button) {
-    openSubject(button.dataset.subject);
-  }
-
-});
-
-/* YEAR SELECTION */
-
-byId("yearGrid").addEventListener("click", event => {
-
-  const button = event.target.closest("[data-year]");
-
-  if (button) {
-    openPaper(button.dataset.year);
-  }
-
-});
-
-/* BACK BUTTON */
-
-byId("backButton").addEventListener("click", () => {
-
-  if (!byId("yearSection").classList.contains("hidden")) {
-
-    byId("yearSection").classList.add("hidden");
-    byId("subjectGrid").classList.remove("hidden");
-    byId("paperSection").classList.add("hidden");
-
-    byId("panelTitle").textContent = "Select a Subject";
-
-    byId("panelDescription").textContent =
-      "Choose a subject to view available examination years.";
-
-    byId("backButton").textContent = "All Semesters";
-
-  } else {
-
-    byId("libraryPanel").classList.add("hidden");
-
-  }
-
-});
-
-/* SEARCH */
-
-byId("searchInput").addEventListener("input", event => {
-
-  const query = event.target.value.trim().toLowerCase();
-
-  if (!query) {
-    byId("libraryPanel").classList.add("hidden");
-    return;
-  }
-
-  const matches = [];
-
-  Object.entries(subjects).forEach(([semester, list]) => {
+  Object.entries(subjects).forEach(([sem, list]) => {
+    if (semester !== "all" && semester !== sem) return;
 
     list.forEach(subject => {
+      if (!subject.toLowerCase().includes(search)) return;
 
-      if (subject.toLowerCase().includes(query)) {
-        matches.push({semester, subject});
+      count++;
+
+      const card = document.createElement("button");
+      card.className = "subject-card";
+
+      if (selectedSubject === subject) {
+        card.classList.add("selected");
       }
 
+      const heading = document.createElement("h3");
+      heading.textContent = subject;
+
+      const detail = document.createElement("span");
+      detail.textContent = sem + " · View question papers";
+
+      card.appendChild(heading);
+      card.appendChild(detail);
+
+      card.addEventListener("click", () => {
+        selectedSemester = sem;
+        selectedSubject = subject;
+
+        document.getElementById("archiveTitle").textContent = subject;
+
+        renderSubjects();
+        renderPapers();
+
+        document.getElementById("archive").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+
+      subjectGrid.appendChild(card);
+    });
+  });
+
+  document.getElementById("subjectCount").textContent =
+    count + (count === 1 ? " subject found" : " subjects found");
+
+  document.getElementById("currentSemesterTitle").textContent =
+    semester === "all" ? "All MBA Subjects" : semester;
+
+  if (count === 0) {
+    subjectGrid.innerHTML =
+      '<p class="empty-message">No subjects found.</p>';
+  }
+}
+
+// SEMESTER CARD CLICK
+
+document.querySelectorAll(".semester-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const sem = card.dataset.semester;
+
+    semesterFilter.value = sem;
+    selectedSemester = sem;
+    selectedSubject = null;
+
+    document.querySelectorAll(".semester-card").forEach(item => {
+      item.classList.remove("active");
     });
 
+    card.classList.add("active");
+
+    document.getElementById("archiveTitle").textContent =
+      "Examination Archive";
+
+    document.getElementById("paperList").innerHTML =
+      '<p class="empty-message">Select a subject to explore question papers.</p>';
+
+    renderSubjects();
+
+    document.getElementById("library").scrollIntoView({
+      behavior: "smooth"
+    });
   });
-
-  byId("libraryPanel").classList.remove("hidden");
-
-  byId("panelLabel").textContent = "SEARCH RESULTS";
-
-  byId("panelTitle").textContent =
-    matches.length + " subject(s) found";
-
-  byId("panelDescription").textContent =
-    "Select a subject to view examination years.";
-
-  byId("subjectGrid").classList.remove("hidden");
-  byId("yearSection").classList.add("hidden");
-  byId("paperSection").classList.add("hidden");
-
-  byId("backButton").textContent = "Close";
-
-  byId("subjectGrid").innerHTML =
-    matches.map(item => `
-      <button
-        type="button"
-        class="subject-button"
-        data-result-semester="${escapeHtml(item.semester)}"
-        data-result-subject="${escapeHtml(item.subject)}"
-      >
-        ${escapeHtml(item.subject)}
-        <small style="display:block;color:#657386">
-          ${escapeHtml(item.semester)}
-        </small>
-      </button>
-    `).join("") ||
-    '<div class="empty">No subjects match your search.</div>';
-
 });
 
-/* UPLOAD FORM */
+// SEARCH AND FILTER
 
-function setupUpload() {
+semesterFilter.addEventListener("change", () => {
+  selectedSemester = semesterFilter.value;
+  selectedSubject = null;
+  renderSubjects();
 
-  byId("uploadYear").innerHTML =
-    '<option value="">Select year</option>' +
-    years.map(year =>
-      `<option value="${year}">${year}</option>`
-    ).join("");
+  document.getElementById("paperList").innerHTML =
+    '<p class="empty-message">Select a subject to explore question papers.</p>';
 
-  byId("uploadSemester").addEventListener("change", event => {
+  document.getElementById("archiveTitle").textContent =
+    "Examination Archive";
+});
 
-    const semester = event.target.value;
+searchInput.addEventListener("input", renderSubjects);
 
-    byId("uploadSubject").disabled = !semester;
+yearFilter.addEventListener("change", renderPapers);
 
-    byId("uploadSubject").innerHTML =
-      '<option value="">Select subject</option>' +
-      (subjects[semester] || []).map(subject =>
-        `<option value="${escapeHtml(subject)}">${escapeHtml(subject)}</option>`
-      ).join("");
+// =====================================
+// SUPABASE CONNECTION
+// =====================================
 
-  });
+const SUPABASE_URL = "https://zbxcurmbrywnagjikyil.supabase.co";
+const SUPABASE_KEY = "sb_publishable_53TSZ3IFVaFavTbWu83_sg_pXHKQBtA";
+const BUCKET_NAME = "Question-Papers";
 
-  byId("uploadForm").addEventListener("submit", async event => {
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
-    event.preventDefault();
+// =====================================
+// PAGE ELEMENTS
+// =====================================
 
-    if (!supabaseClient) {
-      showUploadStatus(
-        "Unable to conn
+const paperContainer =
+    document.getElementById("papersContainer") ||
+    document.getElementById("paperList") ||
+    document.getElementById("papersGrid");
+
+const uploadForm = document.getElementById("uploadForm");
+
+const uploadSubject =
+    document.getElementById("uploadSubject") ||
+    document.getElementById("uploadSemesterSubject");
+
+const fileInput =
+    document.getElementById("paperFiles") ||
+    document.getElementById("questionPaperFiles");
+
+const yearInput =
+    document.getElementById("examYear") ||
+    document.getElementById("year");
+
+
+// =====================================
+// LOAD APPROVED QUESTION PAPERS
+// =====================================
+
+let allPapers = [];
+
+async function loadPapers() {
+
+    if (paperContainer) {
+        paperContainer.innerHTML = "<p>Loading question papers...</p>";
+    }
+
+    const { data, error } = await db
+        .from("paper_submissions")
+        .select("*")
+        .eq("status", "approved")
+        .order("exam_year", { ascending: false });
+
+    if (error) {
+        console.error(error);
+
+        if (paperContainer) {
+            paperContainer.innerHTML =
+                "<p>Unable to load papers. Please try again later.</p>";
+        }
+
+        return;
+    }
+
+    allPapers = data || [];
+    renderPapers();
+}
+
+
+// =====================================
+// DISPLAY QUESTION PAPERS
+// =====================================
+
+function renderPapers() {
+
+    if (!paperContainer) return;
+
+    const filteredPapers = allPapers.filter(paper => {
+
+        const semesterMatch =
+            selectedSemester === "all" ||
+            paper.semester === selectedSemester;
+
+        const subjectMatch =
+            !selectedSubject ||
+            paper.subject === selectedSubject;
+
+        const yearMatch =
+            !yearFilter ||
+            yearFilter.value === "all" ||
+            String(paper.exam_year) === yearFilter.value;
+
+        return semesterMatch && subjectMatch && yearMatch;
+    });
+
+    if (filteredPapers.length === 0) {
+        paperContainer.innerHTML =
+            "<p>No question papers found. Try another subject or year.</p>";
+        return;
+    }
+
+    paperContainer.innerHTML = "";
+
+    filteredPapers.forEach(paper => {
+
+        const card = document.createElement("div");
+        card.className = "paper-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = paper.subject;
+
+        const details = document.createElement("p");
+        details.textContent =
+            paper.semester + " | Exam Year: " + paper.exam_year;
+
+        card.appendChild(heading);
+        card.appendChild(details);
+
+        paper.image_paths.forEach((path, index) => {
+
+            const { data } = db.storage
+                .from(BUCKET_NAME)
+                .getPublicUrl(path);
+
+            const image = document.createElement("img");
+            image.src = data.publicUrl;
+            image.alt = paper.subject + " question paper";
+            image.style.width = "100%";
+            image.style.maxWidth = "450px";
+            image.style.height = "auto";
+            image.style.display = "block";
+            image.style.margin = "12px 0";
+
+            const link = document.createElement("a");
+            link.href = data.publicUrl;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = "View Question Paper " + (index + 1);
+
+            card.appendChild(image);
+            card.appendChild(link);
+        });
+
+        paperContainer.appendChild(card);
+    });
+}
+
+
+// =====================================
+// UPLOAD QUESTION PAPERS
+// =====================================
+
+if (uploadForm) {
+
+    uploadForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        if (!uploadSubject || !fileInput || !yearInput) {
+            alert("Upload form fields could not be found.");
+            return;
+        }
+
+        const semester = uploadSubject.value;
+        const subject = uploadSubject.selectedOptions[0]?.textContent;
+        const examYear = Number(yearInput.value);
+        const files = Array.from(fileInput.files);
+
+        if (!semester || !subject || !examYear || files.length === 0) {
+            alert("Please fill in all details and select question paper images.");
+            return;
+        }
+
+        if (files.length > 20) {
+            alert("You can upload a maximum of 20 images.");
+            return;
+        }
+
+        const validFiles = files.every(file => {
+            const extension = file.name.split(".").pop().toLowerCase();
+
+            return (
+                ["jpg", "jpeg"].includes(extension) &&
+                file.size <= 8 * 1024 * 1024
+            );
+        });
+
+        if (!validFiles) {
+            alert("Only JPG or JPEG images up to 8 MB each are allowed.");
+            return;
+        }
+
+        const submitButton = uploadForm.querySelector(
+            'button[type="submit"], input[type="submit"]'
+        );
+
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Uploading...";
+        }
+
+        const uploadedPaths = [];
+
+        try {
+
+            for (const file of files) {
+
+                const safeName = file.name.replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "_"
+                );
+
+                const filePath =
+                    "pending/" +
+                    Date.now() +
+                    "_" +
+                    Math.random().toString(36).substring(2, 9) +
+                    "_" +
+                    safeName;
+
+                const { error: uploadError } = await db.storage
+                    .from(BUCKET_NAME)
+                    .upload(filePath, file, {
+                        contentType: file.type,
+                        upsert: false
+                    });
+
+                if (uploadError) {
+                    throw uploadError;
+                }
+
+                uploadedPaths.push(filePath);
+            }
+
+            const { error: insertError } = await db
+                .from("paper_submissions")
+                .insert([{
+                    semester: semester,
+                    subject: subject,
+                    exam_year: examYear,
+                    image_paths: uploadedPaths,
+                    status: "approved"
+                }]);
+
+            if (insertError) {
+                throw insertError;
+            }
+
+            alert("Question papers uploaded successfully!");
+
+            uploadForm.reset();
+
+            await loadPapers();
+
+        } catch (error) {
+
+            console.error(error);
+
+            // Remove uploaded files if the database submission fails
+            if (uploadedPaths.length > 0) {
+                await db.storage
+                    .from(BUCKET_NAME)
+                    .remove(uploadedPaths);
+            }
+
+            alert(
+                "Upload failed. Please check your internet connection and Supabase storage permissions."
+            );
+
+        } finally {
+
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = "Upload Question Paper";
+            }
+        }
+    });
+}
+
+
+// =====================================
+// START WEBSITE
+// =====================================
+
+renderSubjects();
+loadPapers();
+</script>
+</body>
+</html>                
