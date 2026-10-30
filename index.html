@@ -556,6 +556,35 @@ footer a {
     padding: 20px;
   }
 }
+
+
+/* UNIVERSITY LOGO */
+
+.university-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 4px;
+    display: block;
+}
+
+/* UNIVERSITY BUILDING HERO IMAGE */
+
+.hero {
+    background-image:
+        linear-gradient(
+            rgba(16, 27, 61, 0.55),
+            rgba(16, 27, 61, 0.75)
+        ),
+        url("svu-building.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  
 </style>
 </head>
   
@@ -593,12 +622,11 @@ footer a {
     <a href="#semesters" class="primary-btn">EXPLORE LIBRARY</a>
   </div>
 </section>
-
 <section class="section" id="about">
   <div class="about">
     <div class="about-image">
       <img
-        src="https://svuniversity.edu.in/storage/2022/04/Business-Management--scaled.jpg"
+        src="svu-building.jpg"
         alt="SVU College of Commerce, Management and Computer Science building">
     </div>
 
@@ -1265,6 +1293,9 @@ if (uploadForm) {
 
 renderSubjects();
 loadPapers();
+
+
+  
 </script>
 </body>
 </html>                
